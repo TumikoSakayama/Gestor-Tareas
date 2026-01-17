@@ -150,7 +150,7 @@ def actualizar_lista(mostrar_tareas=True, filtro_busqueda=None, filtrar_categori
         vencida = "⚠️ Vencida :(" if limite < hoy and not tarea["completado"] else ""
         estado = "✅" if tarea["completado"] else "⏳"
 
-        linea = f"{tarea["id"]}, {estado} {tarea[descripcion]} [{tarea["prioridad"]}] - {tarea[categorias]} | Vence {tarea["finalizar"]} {vencida}"
+        linea = f"{tarea["id"]}, {estado} {tarea["descripcion"]} [{tarea["prioridad"]}] - {tarea["categorias"]} | Vence {tarea["finalizar"]} {vencida}"
         lista_tareas.insert(tk.END, linea)
 
         if vencida:
