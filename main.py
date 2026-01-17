@@ -36,13 +36,10 @@ def cargar_tareas():
                         migrado = True
                     
                 if migrado:
-                    messagebox.showinfo("Migracion", "Se han actualizado las tareas antiguas al formato actual")
                     guardar_tareas()
 
         except Exception as e:
             messagebox.showerror("Error de Carga", f"No se pudo cargar el archivo: {e}")
-            tareas = []
-            contador_id = 0
     else:
         tareas = []
         contador_id = 0
@@ -62,6 +59,14 @@ def guardar_tareas():
 
 def agregar_tarea(descripcion, prioridad='Media', categoria="Sin Especificar"):
     global contador_id
+
+    descripcion = simpledialog.askstring("Nueva Tarea", "Descripcion de la tarea: ")
+    if not descripcion:
+        return
+    prioridad = simpledialog.askstring("Prioridad", "Prioridad (Alta/Media/Baja)") or "Media"
+    prioridad = prioridad.capitalize()
+    categoria = simpledialog.askstring("Categoria", "Categoria: ") or "Sin Especificar"
+
     contador_id += 1
 
     dias_limites = {
@@ -77,7 +82,7 @@ def agregar_tarea(descripcion, prioridad='Media', categoria="Sin Especificar"):
         "id": contador_id,
         "descripcion": descripcion,
         "prioridad": prioridad,
-        "categorias": categoria,
+        "categorias": categoria.capitalize(),
         "completado": False,
         "fecha": str(date.today()),
         "finalizar": str(fecha_limite)
@@ -85,14 +90,9 @@ def agregar_tarea(descripcion, prioridad='Media', categoria="Sin Especificar"):
 
     tareas.append(nueva_tarea)
     guardar_tareas()
+    actualizar_lista()
+    messagebox.showinfo("Exito", f"Tarea #{contador_id} agregada correctamente!")
 
-    mensaje_exito = (
-        f"✓ Tarea agregada satisfactoriament\n\n"
-        f"ID: {contador_id}\n"
-        f"Categoria: {categoria}\n"
-        f"Vence el: {fecha_limite}"
-    )
-    messagebox.showinfo("Tarea Guardada", mensaje_exito)
 
 def mostrar_tareas(mostrar_completadas = False):
     global hoy
