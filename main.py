@@ -140,42 +140,16 @@ def eliminar_tarea():
         guardar_tareas()
         actualizar_lista()
 
-
-def filtrar(valor, campo="categorias"):
-    encontradas = False
-    print(f"\n---Tareas filtradas por {campo}: {valor}---")
-    for tarea in tareas:
-        if tarea.get(campo) == valor:
-            estado = "✓" if tarea["completado"] else " "
-            print(f"[{estado}] {tarea['id']}. {tarea['descripcion']} (Prioridad: {tarea['prioridad']}) de {tarea['categorias']}| Vence: {tarea["finalizar"]}")
-            encontradas = True
-        
-    if not encontradas:
-        print(f"No se encontraron tareas con {campo} = '{valor}'")
-    print("=========================")
-
-def busqueda_tarea(palabra_clave):
-    existe = False
-    busqueda = palabra_clave.lower()
-    print(f"\n----Tareas econtradas con: {palabra_clave}---")
-
-    for tarea in tareas:
-        if busqueda in tarea["descripcion"].lower():
-            existe = True
-            estado = "✓" if tarea["completado"] else " "
-            print(f"[{estado}] {tarea['id']}. {tarea['descripcion']} | Prioridad: {tarea['prioridad']} de {tarea['categorias']}")
-        
-    if not existe:
-        print("No hay tareas con ese termino de busqueda :(")
-    print("=========================")
+def busqueda_tarea():
+    valor_busqueda = simpledialog.askstring("Buscar", "Ingrese la palabra clave:")
+    if valor_busqueda:
+        actualizar_lista(filtro_busqueda=valor_busqueda..lower())
 
 
-def ventana_agregar():
-    descripcion = simpledialog.askstring("Nueva Tarea", "Escribe la descripción:")
-    if descripcion:
-        prioridad = simpledialog.askstring("Entrada", "Prioridad (Baja/Media/Alta):") or "Media"
-        categoria = simpledialog.askstring("Entrada", "Categoria: ") or "Sin Especificar"
-        agregar_tarea(descripcion, prioridad.capitalize(), categoria.capitalize())
+def filtrar_categoria():
+    categoria = simpledialog.askstring("Filtrar", "Escribe la categoria a filtrar:")
+    if categoria:
+        actualizar_lista(filtro_categoria=categoria.capitalize())
 
 
 def menu_principal():
