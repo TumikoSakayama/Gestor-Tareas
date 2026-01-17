@@ -125,16 +125,21 @@ def marcar_completada():
             messagebox.showinfo("Hecho", "La tarea se ha marcado como completa")
             return
 
-def eliminar_tarea(id_tarea):
+def eliminar_tarea():
     global tareas
-    tareas_filtrada = [tarea for tarea in tareas if tarea['id'] != id_tarea]
+    seleccion = lisat_tareas.curseselection()
+    if not seleccion:
+        messagebox.showwarning("Atebncion", "Seleccione una tarea para eliminar (Este cambio no se puede restaurar)")
+        return
     
-    if len(tareas_filtrada) < len(tareas):
-        tareas = tareas_filtrada
-        print(f"Tarea con ID {id_tarea} eliminada")
+    texto = lista_tareas.get(seleccion[0])
+    id_tarea = int(texto.split(".")[0])
+
+    if messagebox.askyesno("Confirmar", f"Procederemos a eliminar la tarea {id_tarea}"):
+        tareas_filtrada = [tarea for tarea in tareas if tarea['id'] != id_tarea]
         guardar_tareas()
-    else:
-        print(f"No se encontro ninguna tarea con ID {id_tarea}")
+        actualizar_lista()
+
 
 def filtrar(valor, campo="categorias"):
     encontradas = False
