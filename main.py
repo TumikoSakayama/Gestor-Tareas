@@ -57,7 +57,7 @@ def guardar_tareas():
     except Exception as e:
         messagebox.showerror("Error al guardar", f"No se pudo guardar la tarea ingresada en el archivo: {e}")
 
-def agregar_tarea(descripcion, prioridad='Media', categoria="Sin Especificar"):
+def agregar_tarea():
     global contador_id
 
     descripcion = simpledialog.askstring("Nueva Tarea", "Descripcion de la tarea: ")
@@ -174,28 +174,23 @@ def actualizar_lista(mostrar_tareas=True, filtro_busqueda=None, filtrar_categori
             lista_tareas.itemconfig(tk.END, {'fg': 'gray'})
 
 def menu_principal():
+    global lista_tareas
     root = tk.Tk()
     root.title("Gestor de Tareas")
-    ancho_ventana = 400
-    alto_ventana = 620
-    root.update_idletasks()
+    root.geometry("700x550")
+    root.configure(bg="#2c3e50")
 
-    ancho_pantalla = root.winfo_screenwidth()
-    alto_pantalla = root.winfo_screenheight()
+    style = {"font": ("Arial", 10, "bold"), "bg": "#34495e", "fg": "white", "relief": "flat", "padx": 10, "pady": 5}
 
-    posicion_x = int((ancho_ventana//2) + (ancho_pantalla//2))
-    posicion_y = int((alto_ventana//2) + (alto_pantalla//2))
-    posicion_y -= 720
-    posicion_x -= 400
+    principal = tk.Frame(root, bg="#1a252f", pady=10)
+    principal.pack(fill="x")
+    tk.Label(principal, text="MIS TAREAS", font=("Arial", 18, "bold"), bg="#1a252f", fg="#ecf0f1").pack()
 
-    root.geometry(f"{ancho_ventana}x{alto_ventana}+{posicion_x}+{posicion_y}")
 
-    root.configure(bg="#1a1a1a")
-    ventana_principal = tk.Frame(root, bg="#1a1a1a")
-    ventana_principal.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+    menu_lateral = tk.Frame(root, bg="#2c3e50", padx=10, pady=10)
+    menu_lateral.pack(side="left", fill="y")
 
-    tk.Label(ventana_principal, text="GESTOR DE TAREAS", fg="white", bg="#1a1a1a", font=("Arial", 16, "bold")).pack(pady=20)
-    tk.Button(ventana_principal, text="1. Agregar tarea", width=25, command=ventana_agregar).pack(pady=20)
+    tk.Button(ventana_principal, text="➕ Agregar tarea", width=25, command=ventana_agregar).pack(pady=20)
     tk.Button(ventana_principal, text="2. Mostrar pendientes", width=25, command=lambda: mostrar_tareas(False)).pack(pady=20)
     tk.Button(ventana_principal, text="3. Mostrar todas", width=25, command=lambda: mostrar_tareas(True)).pack(pady=20)
     tk.Button(ventana_principal, text="4. Filtrar tareas", width=25, command=filtrar).pack(pady=20)
