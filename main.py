@@ -109,14 +109,32 @@ def mostrar_tareas(mostrar_completadas = False):
             print(f"[{estado}] {tarea['id']}. {tarea['descripcion']} (Prioridad: {tarea['prioridad']}) de {tarea['categorias']}| Vence: {tarea["finalizar"]} {vencida}")
     print("========================")
 
-def marcar_completada(id_tarea):
+def marcar_completada():
+    seleccion = lista_tareas.curseselection()
+    if not seleccion:
+        messagebox.showwarning("Atencion", "Seleccione una tarea de la lista, el valor seleccionado no existe!")
+        return
+
+    texto = lista_tareas.get(seleccion[0])
+    id_tarea = int(texto.split(".")[0])
     for tarea in tareas:
         if tarea['id'] == id_tarea:
             tarea['completado'] = True
-            print(f"Tarea {tarea['descripcion']} marcada como completa")
             guardar_tareas()
+            actualizar_lista()
+            messagebox.showinfo("Hecho", "La tarea se ha marcado como completa")
             return
-    print(f"No se econtro ninguna tarea con {id_tarea}.")
+
+def eliminar_tarea(id_tarea):
+    global tareas
+    tareas_filtrada = [tarea for tarea in tareas if tarea['id'] != id_tarea]
+    
+    if len(tareas_filtrada) < len(tareas):
+        tareas = tareas_filtrada
+        print(f"Tarea con ID {id_tarea} eliminada")
+        guardar_tareas()
+    else:
+        print(f"No se encontro ninguna tarea con ID {id_tarea}")
 
 def filtrar(valor, campo="categorias"):
     encontradas = False
@@ -130,17 +148,6 @@ def filtrar(valor, campo="categorias"):
     if not encontradas:
         print(f"No se encontraron tareas con {campo} = '{valor}'")
     print("=========================")
-
-def eliminar_tarea(id_tarea):
-    global tareas
-    tareas_filtrada = [tarea for tarea in tareas if tarea['id'] != id_tarea]
-    
-    if len(tareas_filtrada) < len(tareas):
-        tareas = tareas_filtrada
-        print(f"Tarea con ID {id_tarea} eliminada")
-        guardar_tareas()
-    else:
-        print(f"No se encontro ninguna tarea con ID {id_tarea}")
 
 def busqueda_tarea(palabra_clave):
     existe = False
