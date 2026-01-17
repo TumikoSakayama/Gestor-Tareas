@@ -94,21 +94,6 @@ def agregar_tarea():
     messagebox.showinfo("Exito", f"Tarea #{contador_id} agregada correctamente!")
 
 
-def mostrar_tareas(mostrar_completadas = False):
-    global hoy
-    if not tareas:
-        print("No hay tareas en la lista")
-        return
-
-    print("=====LISTA DE TAREAS=====")
-    for tarea in tareas:
-        if not tarea["completado"] or mostrar_completadas:
-            limite = date.fromisoformat(tarea["finalizar"])
-            vencida = "! TAREA VENCIDA " if limite < hoy and not tarea["completado"] else ""
-            estado = "✓" if tarea["completado"] else " "
-            print(f"[{estado}] {tarea['id']}. {tarea['descripcion']} (Prioridad: {tarea['prioridad']}) de {tarea['categorias']}| Vence: {tarea["finalizar"]} {vencida}")
-    print("========================")
-
 def marcar_completada():
     seleccion = lista_tareas.curseselection()
     if not seleccion:
