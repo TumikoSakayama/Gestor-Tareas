@@ -128,7 +128,7 @@ def eliminar_tarea():
 def busqueda_tarea():
     valor_busqueda = simpledialog.askstring("Buscar", "Ingrese la palabra clave:")
     if valor_busqueda:
-        actualizar_lista(filtro_busqueda=valor_busqueda..lower())
+        actualizar_lista(filtro_busqueda=valor_busqueda.lower())
 
 
 def filtrar_categoria():
