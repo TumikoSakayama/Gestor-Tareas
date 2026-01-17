@@ -199,5 +199,4 @@ def menu_principal():
     root.mainloop()
 
 if __name__ == "__main__":
-    print("Bienvenido al Gestor de tareas")
     menu_principal()  
