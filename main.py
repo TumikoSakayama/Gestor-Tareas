@@ -129,7 +129,7 @@ def eliminar_tarea():
     global tareas
     seleccion = lisat_tareas.curseselection()
     if not seleccion:
-        messagebox.showwarning("Atebncion", "Seleccione una tarea para eliminar (Este cambio no se puede restaurar)")
+        messagebox.showwarning("Atencion", "Seleccione una tarea para eliminar (Este cambio no se puede restaurar)")
         return
     
     texto = lista_tareas.get(seleccion[0])
@@ -151,6 +151,27 @@ def filtrar_categoria():
     if categoria:
         actualizar_lista(filtro_categoria=categoria.capitalize())
 
+def actualizar_lista(mostrar_tareas=True, filtro_busqueda=None, filtrar_categoria=None):
+    lista_tareas.delete(0,tk.END)
+    for tarea in tareas:
+        if not mostrar_tareas and tarea["compleatdo"]:
+            continue
+        if filtro_busqueda and filtro_busqueda not in tarea["descripcion"].lower():
+            continue
+        if filtrar_categoria and filtrar_categoria != tarea["categorias"]:
+            continue
+
+        limite = date.fromisoformat(tarea["finalizar"])
+        vencida = "⚠️ Vencida :(" if limite < hoy and not tarea["completado"] else ""
+        estado = "✅" if tarea["completado"] else "⏳"
+
+        linea = f"{tarea["id"]}, {estado} {tarea[descripcion]} [{tarea["prioridad"]}] - {tarea[categorias]} | Vence {tarea["finalizar"]} {vencida}"
+        lista_tareas.insert(tk.END, linea)
+
+        if vencida:
+            lista_tareas.itemconfig(tk.END, {'fg': 'red'})
+        elif tarea["completado"]:
+            lista_tareas.itemconfig(tk.END, {'fg': 'gray'})
 
 def menu_principal():
     root = tk.Tk()
