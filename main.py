@@ -175,18 +175,29 @@ def menu_principal():
     menu_lateral = tk.Frame(root, bg="#2c3e50", padx=10, pady=10)
     menu_lateral.pack(side="left", fill="y")
 
-    tk.Button(ventana_principal, text="➕ Agregar tarea", width=25, command=ventana_agregar).pack(pady=20)
-    tk.Button(ventana_principal, text="2. Mostrar pendientes", width=25, command=lambda: mostrar_tareas(False)).pack(pady=20)
-    tk.Button(ventana_principal, text="3. Mostrar todas", width=25, command=lambda: mostrar_tareas(True)).pack(pady=20)
-    tk.Button(ventana_principal, text="4. Filtrar tareas", width=25, command=filtrar).pack(pady=20)
-    tk.Button(ventana_principal, text="5. Marcar completada", width=25, command=marcar_completada).pack(pady=20)
-    tk.Button(ventana_principal, text="6. Eliminar tarea", width=25, command=eliminar_tarea).pack(pady=20)
-    tk.Button(ventana_principal, text="7. Búsqueda personalizada", width=25, command=busqueda_tarea).pack(pady=20)
-    tk.Button(ventana_principal, text="8. Salir", width=25, command=root.quit, bg="red", fg="white").pack(pady=40)
+    tk.Button(menu_lateral, text="➕ Agregar Tarea", command=agregar_tarea, **style).pack(fill="x", pady=5)
+    tk.Button(menu_lateral, text="✔ Completar", command=marcar_completada, **style).pack(fill="x", pady=5)
+    tk.Button(menu_lateral, text="🔍 Buscar", command=busqueda_tarea, **style).pack(fill="x", pady=5)
+    tk.Button(menu_lateral, text="📂 Por Categoría", command=filtrar_categoria, **style).pack(fill="x", pady=5)
+    tk.Button(menu_lateral, text="🔄 Ver Todas", command=lambda: actualizar_lista(True), **style).pack(fill="x", pady=5)
+    tk.Button(menu_lateral, text="❌ Eliminar", command=eliminar_tarea, bg="#e74c3c", fg="white", font=("Arial", 10, "bold")).pack(fill="x", pady=20)
+    tk.Button(menu_lateral, text="🚪 Salir", command=root.destroy, bg="#95a5a6").pack(side="bottom", fill="x")
 
+    frame_lista = tk.Frame(root, bg="#2c3e50", padx=10, pady=10)
+    frame_lista.pack(side="right", expand=True, fill="both")
+
+    scrollbar = tk.Scrollbar(frame_lista)
+    scrollbar.pack(side="right", fill="y")
+
+    lista_tareas = tk.Listbox(frame_lista, font=("Consolas", 10), bg="#ecf0f1", yscrollcommand=scrollbar.set)
+    lista_tareas.pack(expand=True, fill="both")
+    scrollbar.config(command=lista_tareas.yview)
+
+    cargar_tareas()
+    actualizar_lista()
+    
     root.mainloop()
 
 if __name__ == "__main__":
     print("Bienvenido al Gestor de tareas")
-    cargar_tareas()
     menu_principal()  
