@@ -44,5 +44,38 @@ class TaskManager:
 
             json.dump(tasks_to_save, file, indent=4, ensure_ascii=False)
 
-    except Exception as e:
-        messagebox.showerror("Save Error", f"Unable to save task at file: {e}")
+        except Exception as e:
+            messagebox.showerror("Save Error", f"Unable to save task at file: {e}")
+
+    def add_task(self, description, priority, category):
+        priorities = {
+            "High": 1,
+            "Medium": 5,
+            "Low": 10
+        }
+        days_to_add = priorities.get(priority, 2)
+
+        today = date.today()
+        limit_date = today + timedelta(days=days_to_add)
+
+        self.last_id += 1
+
+        new_task = Task(
+            task_id = last_id,
+            description = description,
+            priority = priority,
+            category = category,
+            start_date = today,
+            end_date = limit_date
+        )
+
+        self.tasks.append(new_task)
+        self.save_tasks()
+
+        return new_task
+
+    def find_task_by_id(self, task_id):
+        pass
+
+    def delete_task(self, task_id):
+        pass
