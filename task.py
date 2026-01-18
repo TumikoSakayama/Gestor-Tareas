@@ -21,6 +21,7 @@ class Task:
             "is_completed": self.is_completed
         }
 
+    @classmethod
     def task_json(cls, data):
         s_date = date.fromisoformat(data["start_date"])
         e_date = date.fromisoformat(data["end_date"])
@@ -30,13 +31,19 @@ class Task:
             description = data["description"],
             priority = data["priority"],
             category = data["category"],
-            start_date = data["start_date"],
-            end_date = data["end_date"],
+            start_date = s_date,
+            end_date = e_date
             is_completed = data["is_completed"]
         )
 
     def mark_done(self):
-        #Mark a task as completed
+        #We mark a task as completed
+        if not self.is_completed:
+            self.is_completed = True
+            return True
+        return False
 
     def is_expired(self):
         #The task will be mark as expired if we exceed the limit date
+        return not self.is_completed and self.end_date < date.today()
+
