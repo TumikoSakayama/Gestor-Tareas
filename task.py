@@ -11,8 +11,6 @@ class Task:
         self.is_completed = is_completed
 
     def open_file(self):
-        #Here we open the json file
-
         return {
             "id": self.task_id,
             "description": self.description,
@@ -36,3 +34,9 @@ class Task:
             end_date = data["end_date"],
             is_completed = data["is_completed"]
         )
+
+    def mark_done(self):
+        #Mark a task as completed
+
+    def is_expired(self):
+        #The task will be mark as expired if we exceed the limit date
