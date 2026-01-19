@@ -1,11 +1,15 @@
 from task import Task
 import json
 import os
+import sys
 from datetime import date, timedelta
 from tkinter import messagebox
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_TASK_FILE = os.path.join(BASE_DIR, "tareas.json")
+
 class TaskManager:
-    def __init__(self, file_path="tareas.json"):
+    def __init__(self, file_path=DEFAULT_TASK_FILE):
         self.file_path = file_path
         self.tasks = []
         self.last_id = 0
@@ -14,8 +18,6 @@ class TaskManager:
 
     def load_tasks(self):
         if not os.path.exists(self.file_path):
-            self.tasks = []
-            self.last_id = 0
             return
         
         try:
