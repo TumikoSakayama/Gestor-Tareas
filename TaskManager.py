@@ -57,7 +57,7 @@ class TaskManager:
         days_to_add = priorities.get(priority, 2)
 
         today = date.today()
-        limit_date = today + timedelta(days=days_to_add)
+        limit_date = today + time_delta(days=days_to_add)
 
         self.last_id += 1
 

@@ -33,13 +33,13 @@ class TaskApp:
         self.category_combo.grid(row=0, column=5, padx=5, pady=5)
 
         btn_add = ttk.Button(input_frame, text="Add Task", command=self.add_button)
-        btn_add.grid(rwo=0, column=4, padx=10, pady=5)
+        btn_add.grid(row=0, column=4, padx=10, pady=5)
 
         self.tree = ttk.Treeview(self.root, columns=("ID", "Desc", "Prio", "Cat", "Status", "End"), show='headings')
         self.tree.heading("ID", text="ID")
         self.tree.heading("Desc", text="Description")
         self.tree.heading("Prio", text="Priority")
-        self.tree.heading("Cat", text-"Category")
+        self.tree.heading("Cat", text="Category")
         self.tree.heading("Status", text="Status")
         self.tree.heading("End", text="Deadline")
 
@@ -50,20 +50,25 @@ class TaskApp:
         btn_frame = ttk.Frame(self.root)
         btn_frame.pack(fill="x", padx=10, pady=5)
 
-        ttk.Button(btn_frame, text="Mark Completed", command=self.mark_done).pack(side="left", padx=5)
-        ttk.Button(btn_frame, text="Delete Task", command=self.delete_task).pack(side="left", padx=5)
+        ttk.Button(btn_frame, text="Mark Completed", command=self.complete_button).pack(side="left", padx=5)
+        ttk.Button(btn_frame, text="Delete Task", command=self.delete_button).pack(side="left", padx=5)
 
     def refresh_table(self):
-        status = "✅ Done" if task.is_completed else ("⚠️ Expired" if task.is_expired() else "⏳ Pending")
 
-        self.tree.insert("", "end", values=(
-            task.task_id,
-            task.description,
-            task.priority,
-            task.category,
-            status,
-            task.end_date
-        ))
+        for i in self.tree.get_children():
+            self.tree.delete(i)
+
+        for task in self.manager.tasks:
+            status = "✅ Done" if task.is_completed else ("⚠️ Expired" if task.is_expired() else "⏳ Pending")
+
+            self.tree.insert("", "end", values=(
+                task.task_id,
+                task.description,
+                task.priority,
+                task.category,
+                status,
+                task.end_date
+            ))
 
     def add_button(self):
         description = self.description_entry.get()
