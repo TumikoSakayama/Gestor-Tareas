@@ -1,5 +1,5 @@
 **<h1>OS Requirements (Linux)</h1>**
-To complie and run this app on Linux distro you need to also install and update Tkinter for Python as usually won't come pre-installed on some Linux distributions
+To compile and run this app on Linux distro you need to also install and update Tkinter for Python as usually won't come pre-installed on some Linux distributions
 
 
 **For Ubuntu/Debian**
