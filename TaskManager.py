@@ -1,3 +1,4 @@
+from task import Task
 import json
 import os
 from datetime import date
