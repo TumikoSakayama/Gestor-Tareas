@@ -102,7 +102,7 @@ class TaskApp:
         if not chosen:
             return
         
-        id_selected = self.tree.itme(chosen[0])
+        id_selected = self.tree.item(chosen[0])
         task_id = id_selected['values'][0]
 
         if messagebox.askyesno("Confirm", f"Delete task {task_id}?"):

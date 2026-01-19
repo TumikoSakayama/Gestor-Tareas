@@ -1,7 +1,7 @@
 from task import Task
 import json
 import os
-from datetime import date
+from datetime import date, timedelta
 from tkinter import messagebox
 
 class TaskManager:
@@ -43,7 +43,7 @@ class TaskManager:
                     "tasks": task_list 
                 }
 
-            json.dump(tasks_to_save, file, indent=4, ensure_ascii=False)
+                json.dump(tasks_to_save, file, indent=4, ensure_ascii=False)
 
         except Exception as e:
             messagebox.showerror("Save Error", f"Unable to save task at file: {e}")
@@ -57,12 +57,12 @@ class TaskManager:
         days_to_add = priorities.get(priority, 2)
 
         today = date.today()
-        limit_date = today + time_delta(days=days_to_add)
+        limit_date = today + timedelta(days=days_to_add)
 
         self.last_id += 1
 
         new_task = Task(
-            task_id = last_id,
+            task_id = self.last_id,
             description = description,
             priority = priority,
             category = category,
@@ -87,7 +87,7 @@ class TaskManager:
 
 
     def delete_task(self, task_id):
-        task = find_task_by_id(task_id)
+        task = self.find_task_by_id(task_id)
         if task:
             self.tasks.remove()
             self.save_tasks()
