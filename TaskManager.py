@@ -71,11 +71,23 @@ class TaskManager:
 
         self.tasks.append(new_task)
         self.save_tasks()
-
         return new_task
 
     def find_task_by_id(self, task_id):
-        pass
+        for task in self.tasks:
+            if task.task_id == task_id:
+                return task
+        return None
+
+    def search(self, value):
+        value = value.lower()
+        results = [task for task in self.tasks if query in task.description.lower()]
+        return results
+
 
     def delete_task(self, task_id):
-        pass
+        task = find_task_by_id(task_id)
+        if task:
+            self.tasks.remove()
+            self.save_tasks()
+            return
