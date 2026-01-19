@@ -9,7 +9,7 @@ try:
 except Exception:
     pass
 
-TASK_FILES = "tasks.json"
+"""TASK_FILES = "tasks.json"
 tasks = []
 id_count = 0
 today = date.today()
@@ -196,7 +196,9 @@ def main_menu():
     load_tasks()
     update_task()
     
-    root.mainloop()
+    root.mainloop()"""
 
 if __name__ == "__main__":
-    main_menu()  
+    root =tk.Tk()
+    app = TaskApp(root)
+    root.mainloop()
