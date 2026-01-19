@@ -8,7 +8,7 @@ try:
     ctypes.windll.shcore.SetProcessDpiAwareness(1)
 except Exception:
     pass
-from task_app import TaskApp
+from TaskApp import TaskApp
 
 """TASK_FILES = "tasks.json"
 tasks = []

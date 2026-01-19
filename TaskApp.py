@@ -1,4 +1,4 @@
-from task_manager = import TaskManager
+from TaskManager import TaskManager
 import tkinter as tk
 from tkinter import ttk, messagebox
 
@@ -54,7 +54,7 @@ class TaskApp:
         ttk.Button(btn_frame, text="Delete Task", command=self.delete_task).pack(side="left", padx=5)
 
     def refresh_table(self):
-        status = "✅ Done" if task.is_completed else ("⚠️ Expired" if task.is_expired())
+        status = "✅ Done" if task.is_completed else ("⚠️ Expired" if task.is_expired() else "⏳ Pending")
 
         self.tree.insert("", "end", values=(
             task.task_id,

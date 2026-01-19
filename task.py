@@ -32,7 +32,7 @@ class Task:
             priority = data["priority"],
             category = data["category"],
             start_date = s_date,
-            end_date = e_date
+            end_date = e_date,
             is_completed = data["is_completed"]
         )
 
