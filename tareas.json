@@ -1,5 +1,5 @@
 {
-    "last_id": 2,
+    "last_id": 3,
     "tasks": [
         {
             "id": 1,
@@ -11,13 +11,13 @@
             "is_completed": true
         },
         {
-            "id": 2,
-            "description": "Segundo Tarea",
-            "priority": "High",
-            "category": "Work",
-            "start_date": "2026-01-18",
-            "end_date": "2026-01-19",
-            "is_completed": false
+            "id": 3,
+            "description": "Task 2 for testing",
+            "priority": "Low",
+            "category": "Study",
+            "start_date": "2026-01-24",
+            "end_date": "2026-02-03",
+            "is_completed": true
         }
     ]
 }

@@ -6,7 +6,7 @@ class TaskApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Do It, JUST DO IT!")
-        self.root.geometry("800x600")
+        self.root.geometry("850x600")
 
         self.manager = TaskManager()
 
@@ -53,7 +53,17 @@ class TaskApp:
         ttk.Button(btn_frame, text="Mark Completed", command=self.complete_button).pack(side="left", padx=5)
         ttk.Button(btn_frame, text="Delete Task", command=self.delete_button).pack(side="left", padx=5)
 
+        search_frame = ttk.Frame(self.root)
+        search_frame.pack(fill="x", padx=10, pady=5)
+
+        ttk.Label(search_frame, text="🔍 Search:").pack(side="left", padx=5)
+        self.search_var = tk.StringVar()
+        self.search_entry = ttk.Entry(search_frame, textvariable=self.search_var)
+        self.search_entry.pack(side="left", fill="x", expand=True, padx=5)
+        self.search_entry.bind("<KeyRelease>", self.on_search)
+
     def refresh_table(self):
+        self.on_search()
 
         for i in self.tree.get_children():
             self.tree.delete(i)
@@ -111,3 +121,21 @@ class TaskApp:
                 self.refresh_table()
             else:
                 messagebox.showerror("Error", "Task not found")
+
+    def on_search(self, event):
+        query = self.search_var.get().lower()
+        for i in self.tree.get_children():
+            self.tree.delete(i)
+
+        for task in self.manager.tasks:
+            if query not in task.description.lower() and query not in task.category.lower():
+                status = "✅ Done" if task.is_completed else ("⚠️ Expired" if task.is_expired() else "⏳ Pending")
+
+            self.tree.insert("", "end", values=(
+                task.task_id,
+                task.description,
+                task.priority,
+                task.category,
+                status,
+                task.end_date
+            ))
