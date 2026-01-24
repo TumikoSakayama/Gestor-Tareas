@@ -30,10 +30,10 @@ class TaskApp:
         ttk.Label(input_frame, text="Category:").grid(row=0, column=2, padx=5, pady=5)
         self.category_combo = ttk.Combobox(input_frame, values=["Unespecified", "Study", "Work", "Health", "Financial"])
         self.category_combo.set("Unespecified")
-        self.category_combo.grid(row=0, column=5, padx=5, pady=5)
+        self.category_combo.grid(row=0, column=4, padx=5, pady=5)
 
         btn_add = ttk.Button(input_frame, text="Add Task", command=self.add_button)
-        btn_add.grid(row=0, column=4, padx=10, pady=5)
+        btn_add.grid(row=0, column=5, padx=10, pady=5)
 
         self.tree = ttk.Treeview(self.root, columns=("ID", "Desc", "Prio", "Cat", "Status", "End"), show='headings')
         self.tree.heading("ID", text="ID")
