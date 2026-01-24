@@ -65,21 +65,6 @@ class TaskApp:
     def refresh_table(self):
         self.on_search()
 
-        # for i in self.tree.get_children():
-        #     self.tree.delete(i)
-
-        # for task in self.manager.tasks:
-        #     status = "✅ Done" if task.is_completed else ("⚠️ Expired" if task.is_expired() else "⏳ Pending")
-
-        #     self.tree.insert("", "end", values=(
-        #         task.task_id,
-        #         task.description,
-        #         task.priority,
-        #         task.category,
-        #         status,
-        #         task.end_date
-        #     ))
-
     def add_button(self):
         description = self.description_entry.get()
         priority = self.priority_combo.get()
