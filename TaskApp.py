@@ -100,11 +100,14 @@ class TaskApp:
     def delete_button(self):
         chosen = self.tree.selection()
         if not chosen:
+            messagebox.showerror("Error", "No task selected")
             return
         
         id_selected = self.tree.item(chosen[0])
         task_id = id_selected['values'][0]
 
         if messagebox.askyesno("Confirm", f"Delete task {task_id}?"):
-            self.manager.delete_task(task_id)
-            self.refresh_table()
+            if self.manager.delete_task(task_id):
+                self.refresh_table()
+            else:
+                messagebox.showerror("Error", "Task not found")

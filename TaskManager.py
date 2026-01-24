@@ -91,6 +91,7 @@ class TaskManager:
     def delete_task(self, task_id):
         task = self.find_task_by_id(task_id)
         if task:
-            self.tasks.remove()
+            self.tasks.remove(task)
             self.save_tasks()
-            return
+            return True
+        return False
