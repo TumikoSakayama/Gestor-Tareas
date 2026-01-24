@@ -6,7 +6,7 @@ class TaskApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Do It, JUST DO IT!")
-        self.root.geometry("850x600")
+        self.root.geometry("900x600")
 
         self.manager = TaskManager()
 
@@ -65,20 +65,20 @@ class TaskApp:
     def refresh_table(self):
         self.on_search()
 
-        for i in self.tree.get_children():
-            self.tree.delete(i)
+        # for i in self.tree.get_children():
+        #     self.tree.delete(i)
 
-        for task in self.manager.tasks:
-            status = "✅ Done" if task.is_completed else ("⚠️ Expired" if task.is_expired() else "⏳ Pending")
+        # for task in self.manager.tasks:
+        #     status = "✅ Done" if task.is_completed else ("⚠️ Expired" if task.is_expired() else "⏳ Pending")
 
-            self.tree.insert("", "end", values=(
-                task.task_id,
-                task.description,
-                task.priority,
-                task.category,
-                status,
-                task.end_date
-            ))
+        #     self.tree.insert("", "end", values=(
+        #         task.task_id,
+        #         task.description,
+        #         task.priority,
+        #         task.category,
+        #         status,
+        #         task.end_date
+        #     ))
 
     def add_button(self):
         description = self.description_entry.get()
@@ -122,20 +122,27 @@ class TaskApp:
             else:
                 messagebox.showerror("Error", "Task not found")
 
-    def on_search(self, event):
-        query = self.search_var.get().lower()
+    def on_search(self, event=None):
+        query = self.search_var.get().strip().lower()
+
         for i in self.tree.get_children():
             self.tree.delete(i)
-
+            
         for task in self.manager.tasks:
-            if query not in task.description.lower() and query not in task.category.lower():
-                status = "✅ Done" if task.is_completed else ("⚠️ Expired" if task.is_expired() else "⏳ Pending")
+            if query == "" or query in task.description.lower():
+                
+                if task.is_completed:
+                    status = "✅ Done"
+                elif task.is_expired():
+                    status = "⚠️ Expired"
+                else:
+                    status = "⏳ Pending"
 
-            self.tree.insert("", "end", values=(
-                task.task_id,
-                task.description,
-                task.priority,
-                task.category,
-                status,
-                task.end_date
-            ))
+                self.tree.insert("", "end", values=(
+                    task.task_id,
+                    task.description,
+                    task.priority,
+                    task.category,
+                    status,
+                    task.end_date
+                ))

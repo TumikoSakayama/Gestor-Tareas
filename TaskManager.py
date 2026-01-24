@@ -84,7 +84,7 @@ class TaskManager:
 
     def search(self, value):
         value = value.lower()
-        results = [task for task in self.tasks if query in task.description.lower()]
+        results = [task for task in self.tasks if task in task.description.lower()]
         return results
 
 

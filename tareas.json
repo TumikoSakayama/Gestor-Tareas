@@ -1,5 +1,5 @@
 {
-    "last_id": 3,
+    "last_id": 4,
     "tasks": [
         {
             "id": 1,
@@ -11,13 +11,13 @@
             "is_completed": true
         },
         {
-            "id": 3,
-            "description": "Task 2 for testing",
+            "id": 4,
+            "description": "Study study STUDY",
             "priority": "Low",
-            "category": "Study",
+            "category": "Work",
             "start_date": "2026-01-24",
             "end_date": "2026-02-03",
-            "is_completed": true
+            "is_completed": false
         }
     ]
 }
