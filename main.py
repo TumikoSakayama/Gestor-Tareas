@@ -1,7 +1,7 @@
 import os
 import json
 from datetime import date, timedelta
-import tkinter as tk
+import customtkinter as ctk
 from tkinter import messagebox, simpledialog, Toplevel, Listbox, Scrollbar
 import ctypes
 try:
@@ -11,6 +11,6 @@ except Exception:
 from TaskApp import TaskApp
 
 if __name__ == "__main__":
-    root =tk.Tk()
+    root = ctk.CTk()
     app = TaskApp(root)
     root.mainloop()

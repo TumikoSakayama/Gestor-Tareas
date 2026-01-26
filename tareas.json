@@ -1,15 +1,6 @@
 {
-    "last_id": 4,
+    "last_id": 6,
     "tasks": [
-        {
-            "id": 1,
-            "description": "Prueba 1",
-            "priority": "Medium",
-            "category": "Study",
-            "start_date": "2026-01-18",
-            "end_date": "2026-01-23",
-            "is_completed": true
-        },
         {
             "id": 4,
             "description": "Study study STUDY",
@@ -17,6 +8,24 @@
             "category": "Work",
             "start_date": "2026-01-24",
             "end_date": "2026-02-03",
+            "is_completed": true
+        },
+        {
+            "id": 5,
+            "description": "Adding anew task fortesting",
+            "priority": "Medium",
+            "category": "Unespecified",
+            "start_date": "2026-01-24",
+            "end_date": "2026-01-29",
+            "is_completed": false
+        },
+        {
+            "id": 6,
+            "description": "Testing customtkinter for main",
+            "priority": "Low",
+            "category": "Work",
+            "start_date": "2026-01-25",
+            "end_date": "2026-02-04",
             "is_completed": false
         }
     ]
